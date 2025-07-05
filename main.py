@@ -44,27 +44,52 @@ print("Індекси парних чисел:", indexlist)
 
 #5
 
-sting = input("введіть рядок: ").split()
-
-number_count = 0
-rozdil_count = 0
-symbol_count = 0
+text = input("Введіть текст: ")
 
 
-upper = sting.title()
+sentences = []
+sentence = ""
+for ch in text:
+    sentence += ch
+    if ch == '.':
+        sentence = sentence.strip()
+        if len(sentence) > 0:
+            sentence = sentence[0].upper() + sentence[1:]
+        sentences.append(sentence)
+        sentence = ""
 
-for i in range(len(sting)):
-    if sting[i].isdigit():
-        number_count += 1
-    elif sting[i] == "," or "." or ";" or ":" or "?":
-        rozdil_count += 1
-    elif sting[i] == "!":
-        symbol_count += 1
 
-print(upper)
-print("кількість чисел:", number_count)
-print("кількість розділових знаків:", rozdil_count)
-print("кількість символів '!' :", symbol_count)
+if sentence.strip() != "":
+    sentence = sentence.strip()
+    sentence = sentence[0].upper() + sentence[1:]
+    sentences.append(sentence)
+
+new_text = ' '.join(sentences)
+print(new_text)
+
+
+digit_count = 0
+for ch in text:
+    if ch in "0123456789":
+        digit_count += 1
+
+
+punctuation_count = 0
+punctuation = [',', '.', ';', ':', '!', '?', '-', '—', '(', ')']
+for ch in text:
+    for mark in punctuation:
+        if ch == mark:
+            punctuation_count += 1
+
+
+exclamation_count = 0
+for ch in text:
+    if ch == '!':
+        exclamation_count += 1
+
+print("\nКількість цифр:", digit_count)
+print("Кількість розділових знаків:", punctuation_count)
+print("Кількість знаків оклику:", exclamation_count)
 
 #6
 
